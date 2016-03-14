@@ -19,6 +19,7 @@ RUN wget -q -O alfresco-community.bin http://dl.alfresco.com/release/community/2
 
 RUN /alfresco-community.bin --installer-language en --prefix ${ALFRESCO_BASE} --postgres_port 5432 --alfresco_ftp_port 21 --alfresco_admin_password ${ADMIN_PASSWORD} && \
     rm -f /alfresco-community.bin
+
 #ENTRYPOINT ["/etc/init.d/alfresco"]
 VOLUME ["${DATA_DIR}"]
 CMD ["bash"]
