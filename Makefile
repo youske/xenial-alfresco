@@ -1,9 +1,7 @@
-IMAGE_NAME := youske/alpine-loopback
+IMAGE_NAME := youske/xenial-alfresco
 
-build:
+build: Dockerfile
 	docker --file Dockerfile -t "${IMAGE_NAME}" .
 
-build_nocache:
+build_nocache: Dockerfile
 	docker --file Dockerfile --no-cache -t "${IMAGE_NAME}" .
-
-
