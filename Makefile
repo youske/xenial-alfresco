@@ -5,3 +5,6 @@ build: Dockerfile
 
 build_nocache: Dockerfile
 	docker --file Dockerfile --no-cache -t "${IMAGE_NAME}" .
+
+run: build
+	docker run -it -p ${SHARE_PORT}:${SHARE_PORT}
