@@ -1,5 +1,5 @@
 #!/bin/bash -eu
-DATE=`date +"%Y%m%d%h"`
+DATE=`TZ='Asia/Tokyo' date +"%Y%m%d%H"`
 BASE=/alfresco-community
 TARGET=${BASE}/alf_data
 OUTDIR=/alfresco-recovery
@@ -16,7 +16,7 @@ alf_backup () {
 }
 
 if [ -d $TARGET ] ; then
-  [ -f ${BASE}/alfresco.sh ] && ${BASE}/alfresco.sh stop pgsql || :
-  [ -d $OUTDIR ] && alf_backup || echo "skip backup"
-  [ -f ${BASE}/alfresco.sh ] && ${BASE}/alfresco.sh start pgsql || :
+  [ -f ${BASE}/alfresco.sh ] && ${BASE}/alfresco.sh stop || :
+  [ -d ${OUTDIR} ] && alf_backup || echo "skip backup"
+  [ -f ${BASE}/alfresco.sh ] && ${BASE}/alfresco.sh start || :
 fi
