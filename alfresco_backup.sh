@@ -1,4 +1,5 @@
 #!/bin/bash -eu
+
 DATE=`TZ='Asia/Tokyo' date +"%Y%m%d%H"`
 BASE=/alfresco-community
 TARGET=${BASE}/alf_data
