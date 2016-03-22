@@ -10,7 +10,7 @@ ENV SHARE_PORT=8080 \
     ALFRESCO_BASE=/alfresco-community \
     ALFRESCO_AMPS=/alfresco-community/amps \
     ALFRESCO_AMPSSHARE=/alfresco-community/amps_share \
-    ALFRESCO_LIBREOFFICE=/alfresco-community/libreoffice/scripts \
+    ALFRESCO_LIBREOFFICE=/alfresco-community/libreoffice \
     DATA_DIR=/alfresco-community/alf_data
 
 RUN apt-get update && apt-get -y upgrade && \
@@ -32,7 +32,7 @@ RUN /alfresco-community.bin --mode text --installer-language en \
     --alfresco_admin_password ${ADMIN_PASSWORD} && \
     rm -f /alfresco-community.bin && \
     apt-get autoremove && apt-get autoclean && \
-    ln -s -f ${ALFRESCO_LIBREOFFICE}/libreoffice_ctl.sh ${ALFRESCO_LIBREOFFICE}/ctl.sh && \
+    ln -s -f ${ALFRESCO_LIBREOFFICE}/scripts/libreoffice_ctl.sh ${ALFRESCO_LIBREOFFICE}/scripts/ctl.sh && \
     echo "end setup alfresco"
 
 # amps

@@ -1,4 +1,7 @@
 #!/bin/bash -eu
+#  リストア
+#  /alfrescor_backup.shでの得られるバックアップにて上書きコピーを行う
+#
 
 DATE=`TZ='Asia/Tokyo' date +"%Y%m%d%H"`
 BASE=/alfresco-community
