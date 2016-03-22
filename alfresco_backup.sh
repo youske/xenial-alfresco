@@ -1,4 +1,10 @@
 #!/bin/bash -eu
+# バックアップ　
+# /alfresco-recoveryフォルダにて
+# alf_data/contentstore, alf_data/postgresql, alf_data/solr4/index,
+# 各ファイルともにバックアップ時の日付が名前に入る
+#
+
 DATE=`TZ='Asia/Tokyo' date +"%Y%m%d%H"`
 BASE=/alfresco-community
 TARGET=${BASE}/alf_data

@@ -29,6 +29,7 @@ RUN /alfresco-community.bin --mode text --installer-language en \
     --alfresco_admin_password ${ADMIN_PASSWORD} && \
     rm -f /alfresco-community.bin && \
     apt-get autoremove && apt-get autoclean && \
+    ln -s -f ${ALFRESCO_BASE}/libreoffice/scripts/libreoffice_ctl.sh ${ALFRESCO_BASE}/libreoffice/scripts/ctl.sh && \
     echo "end setup alfresco"
 
 COPY alfresco_run.sh /alfresco_run.sh
