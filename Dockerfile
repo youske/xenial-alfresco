@@ -1,6 +1,6 @@
 # ubuntu xenial with alfresco
 
-from ubuntu:xenial
+FROM ubuntu:xenial
 MAINTAINER youske miyakoshi <youske@gmail.com>
 
 ENV SHARE_PORT=8080 \
