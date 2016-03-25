@@ -23,7 +23,7 @@ alf_restore() {
     tar zxvf ${OUTDIR}/alf_content_${DT}.tar.gz
   fi
 
-  if [ -f ${OUTDIR}/alf_solrindex_${DT}.tar.z ] ; then
+  if [ -f ${OUTDIR}/alf_solrindex_${DT}.tar.gz ] ; then
     [ -d ./solr4/index ] && rm -r ./solr4/index || echo "remove skip solrindex_$DT"
     tar zxvf ${OUTDIR}/alf_solrindex_${DT}.tar.gz
   fi

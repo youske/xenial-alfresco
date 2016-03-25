@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/bin/bash -eu
+
 ALFRESCO=/alfresco-community
 ${ALFRESCO}/alfresco.sh start
 

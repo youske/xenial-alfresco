@@ -14,11 +14,11 @@ require resource core 2+ RAM 4.0G+
 
 # run
 
-    docker run -it -p 8080:8080 -p 21:21 --volumes-from alf_dataconteinr youske/xenial-alfresco
+    docker run -it -p 8080:8080 -p 21:21 --volumes-from alf_datacontainer youske/xenial-alfresco
 
 # change admin password
 
-    docker run -it -v /optalfresco -e ADMIN_PASSWORD=hogehoge
+    docker run -it -p8080:8080 -e ADMIN_PASSWORD=hogehoge
 
 # shutdown & restart
     docker exec -it <container name> /bin/bash
