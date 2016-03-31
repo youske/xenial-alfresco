@@ -12,9 +12,9 @@ Makefile*
 LICENSE
 README*
 
+.tags
 *.swp
 *.lock
 *.lck
 *.*~
 *~
-.tags
