@@ -45,12 +45,14 @@ RUN wget -qP ${ALFRESCO_AMPS} https://github.com/share-extras/js-console/release
 #    wget -qP ${ALFRESCO_AMPSSHARE} https://github.com/teqnology/alfresco-header-share/blob/master/target/alfresco-header-share.amp?raw=true && \
     wget -qP ${ALFRESCO_AMPSSHARE} http://www.form4.de/fileadmin/user_upload/Pix/Leistungen/alfresco/extensions/form4.alfresco.htmlwebpreviewer-1.0.0.amp && \
     ${ALFRESCO_BASE}/bin/apply_amps.sh
+
 COPY alfresco_run.sh /alfresco_run.sh
 COPY alfresco_backup.sh /alfresco_backup.sh
 COPY alfresco_restore.sh /alfresco_restore.sh
 
-#ENTRYPOINT ["/alfresco_run.sh"]
-#CMD ["start"]
-CMD ["sh"]
-
 EXPOSE 21 5432 8005 8080 8100 8443
+
+#ENTRYPOINT ["/alfresco_run.sh"]
+#CMD [""]
+#CMD ["sh"]
+CMD ${ALFRESCO_BASE}/alfresco.sh start & tail -f

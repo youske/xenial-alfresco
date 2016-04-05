@@ -9,4 +9,24 @@ services:
         soft: 20000
         hard: 40000
       nproc: 65535
+    ports:
+      - "21:21"
+      - "8080:8080"
+    volumes:
+      - data:/alfresco-recovery
+    networks:
+      - front
     stdin_open: true
+    tty: true
+#    logging:
+#      driver: syslog
+#      options:
+#        syslog-address: "tcp://192.168.0.42:123"
+
+volumes:
+  data:
+    driver: local
+
+networks:
+  front:
+    driver: bridge
