@@ -13,6 +13,12 @@ ENV SHARE_PORT=8080 \
     ALFRESCO_LIBREOFFICE=/alfresco-community/libreoffice \
     DATA_DIR=/alfresco-community/alf_data
 
+# entrykit
+ENV ENTRYKIT_VERSION=0.4.0
+ENV ENTRYKIT_FILE=entrykit_${ENTRYKIT_VERSION}_Linux_x86_64.tgz
+ENV ENTRYKIT_DOWNLOAD=https://github.com/progrium/entrykit/releases/download/v${ENTRYKIT_VERSION}/${ENTRYKIT_FILE}
+
+
 RUN apt-get update && apt-get -y upgrade && \
     apt-get install -y wget language-pack-ja && \
     update-locale LANG=${LANGUAGE}
@@ -53,6 +59,4 @@ COPY alfresco_restore.sh /alfresco_restore.sh
 EXPOSE 21 5432 8005 8080 8100 8443
 
 #ENTRYPOINT ["/alfresco_run.sh"]
-#CMD [""]
-#CMD ["sh"]
 CMD ${ALFRESCO_BASE}/alfresco.sh start & tail -f
