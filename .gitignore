@@ -1,14 +1,17 @@
 #
-vendor/
 node_modules/
+vendor/
 tests/
 
 #
 .sync-config.cson
 .remote-sync.json
+
 .tags
 *.swp
 $.lock
 $.lck
 *.*~
 *~
+
+!.gitkeep

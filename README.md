@@ -45,3 +45,26 @@ require resource core 2+ RAM 4.0G+
 # data recover
 
     alfresco-restore.sh
+
+
+
+
+
+# timeout 設定変更
+
+
+Alfresco uses sessions cookies which are valid for 60 minutes, which means users are logged out after being inactive for 60 minutes and have to login multiple times a day.
+
+To increase the session timeouts, change the values in web.xml as below:
+<session-config>
+   <session-timeout>720</session-timeout>
+</session-config>
+
+The above config will keep the session active for 12 hours.
+
+The web.xml files are found under the following folders:
+
+ALFRESCO_HOME/tomcat/webapps/share/WEB-INF/web.xml
+ALFRESCO_HOME/tomcat/webapps/alfresco/WEB-INF/web.xml
+
+Once modified, restart Alfresco for the changes to take effect.

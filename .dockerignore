@@ -7,9 +7,9 @@ tests/
 #
 .gitignore
 .gitkeep
+.gitattribute
 .sync-config.cson
 .remote-sync.json
-Makefile*
 LICENSE*
 README*
 
