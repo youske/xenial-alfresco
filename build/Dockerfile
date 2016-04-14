@@ -18,12 +18,11 @@ ENV ENTRYKIT_VERSION=0.4.0
 ENV ENTRYKIT_FILE=entrykit_${ENTRYKIT_VERSION}_Linux_x86_64.tgz
 ENV ENTRYKIT_DOWNLOAD=https://github.com/progrium/entrykit/releases/download/v${ENTRYKIT_VERSION}/${ENTRYKIT_FILE}
 
-
 RUN apt-get update && apt-get -y upgrade && \
     apt-get install -y wget language-pack-ja && \
     update-locale LANG=${LANGUAGE}
 
-RUN wget -q -O alfresco-community.bin ${DOWNLOAD_URL} && \
+RUN wget -q ${DOWNLOAD_URL} -O alfresco-community.bin && \
     chmod +x alfresco-community.bin
 
 RUN /alfresco-community.bin --mode text --installer-language en \
