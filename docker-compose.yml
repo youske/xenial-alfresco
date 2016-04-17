@@ -15,7 +15,7 @@ services:
     volumes:
       - data:/alfresco-recovery
     networks:
-      - front
+      - omni
     stdin_open: true
     tty: true
 #    logging:
@@ -28,5 +28,6 @@ volumes:
     driver: local
 
 networks:
-  front:
-    driver: bridge
+  omni:
+    external:
+      name: omni-network
