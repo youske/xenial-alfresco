@@ -32,7 +32,7 @@ RUN wget -q --no-check-certificate ${ENTRYKIT_DOWNLOAD} -O- | tar zx && \
 # gosu
 RUN wget -q --no-check-certificate ${GOSU_DOWNLOAD} -O /usr/bin/gosu && chmod +x /usr/bin/gosu
 
-RUN wget -q -O alfresco-community.bin ${DOWNLOAD_URL} && \
+RUN wget -q ${DOWNLOAD_URL} -O alfresco-community.bin && \
     chmod +x alfresco-community.bin
 
 RUN /alfresco-community.bin --mode text --installer-language en \
