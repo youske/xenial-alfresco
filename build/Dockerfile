@@ -18,9 +18,19 @@ ENV ENTRYKIT_VERSION=0.4.0
 ENV ENTRYKIT_FILE=entrykit_${ENTRYKIT_VERSION}_Linux_x86_64.tgz
 ENV ENTRYKIT_DOWNLOAD=https://github.com/progrium/entrykit/releases/download/v${ENTRYKIT_VERSION}/${ENTRYKIT_FILE}
 
+ENV GOSU_VERSION=1.7
+ENV GOSU_DOWNLOAD=https://github.com/tianon/gosu/releases/download/${GOSU_VERSION}/gosu-amd64
+
 RUN apt-get update && apt-get -y upgrade && \
     apt-get install -y wget language-pack-ja && \
     update-locale LANG=${LANGUAGE}
+
+# entrykit install
+RUN wget -q --no-check-certificate ${ENTRYKIT_DOWNLOAD} -O- | tar zx && \
+    chmod +x /entrykit && mv /entrykit /usr/bin && /usr/bin/entrykit --symlink
+
+# gosu
+RUN wget -q --no-check-certificate ${GOSU_DOWNLOAD} -O /usr/bin/gosu && chmod +x /usr/bin/gosu
 
 RUN wget -q ${DOWNLOAD_URL} -O alfresco-community.bin && \
     chmod +x alfresco-community.bin
@@ -37,8 +47,7 @@ RUN /alfresco-community.bin --mode text --installer-language en \
     --alfresco_admin_password ${ADMIN_PASSWORD} && \
     rm -f /alfresco-community.bin && \
     apt-get autoremove && apt-get autoclean && \
-    ln -s -f ${ALFRESCO_LIBREOFFICE}/scripts/libreoffice_ctl.sh ${ALFRESCO_LIBREOFFICE}/scripts/ctl.sh && \
-    echo "end setup alfresco"
+    ln -s -f ${ALFRESCO_LIBREOFFICE}/scripts/libreoffice_ctl.sh ${ALFRESCO_LIBREOFFICE}/scripts/ctl.sh
 
 # amps
 RUN wget -qP ${ALFRESCO_AMPS} https://github.com/share-extras/js-console/releases/download/v0.6.0-rc1/javascript-console-repo-0.6.0.amp && \
@@ -57,5 +66,6 @@ COPY alfresco_restore.sh /alfresco_restore.sh
 
 EXPOSE 21 5432 8005 8080 8100 8443
 
-#ENTRYPOINT ["/alfresco_run.sh"]
-CMD ${ALFRESCO_BASE}/alfresco.sh start & tail -f
+ENTRYPOINT ["switch","shell=/bin/bash","--","bash","/alfresco_run.sh"]
+
+#CMD ${ALFRESCO_BASE}/alfresco.sh start & tail -f

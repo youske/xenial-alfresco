@@ -1,10 +1,10 @@
 #
-.git*
 node_modules/
 vendor/
 tests/
 
 #
+.git*
 .sync-config.cson
 .remote-sync.json
 LICENSE*
