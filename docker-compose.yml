@@ -14,8 +14,6 @@ services:
       - "8080:8080"
     volumes:
       - data:/alfresco-recovery
-    networks:
-      - omni
     stdin_open: true
     tty: true
     
@@ -28,7 +26,3 @@ volumes:
   data:
     driver: local
 
-networks:
-  omni:
-    external:
-      name: omni-network

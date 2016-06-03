@@ -4,7 +4,7 @@ FROM ubuntu:xenial
 MAINTAINER youske miyakoshi <youske@gmail.com>
 
 ENV ALFRESCO_VERSION=201605 \
-    ALFRESCO_BUILD=00010 
+    ALFRESCO_BUILD=00010
 
 ENV SHARE_PORT=8080 \
     ADMIN_PASSWORD=admin \
@@ -53,22 +53,19 @@ RUN /alfresco-community.bin --mode text --installer-language en \
     ln -s -f ${ALFRESCO_LIBREOFFICE}/scripts/libreoffice_ctl.sh ${ALFRESCO_LIBREOFFICE}/scripts/ctl.sh
 
 # amps
-#RUN wget -qP ${ALFRESCO_AMPS} https://github.com/share-extras/js-console/releases/download/v0.6.0-rc1/javascript-console-repo-0.6.0.amp && \
-#    wget -qP ${ALFRESCO_AMPS} https://github.com/pmonks/alfresco-bulk-import/releases/download/2.0.1/alfresco-bulk-import-2.0.1.amp && \
-#    wget -qP ${ALFRESCO_AMPS} https://github.com/Alfresco/alfresco-support-tools/releases/download/1.10/support-tools-1.10.amp && \
-#    wget -qP ${ALFRESCO_AMPS} https://github.com/ntmcminn/alfresco-pdf-toolkit/releases/download/1.3-Beta3/pdf-toolkit-repo.amp && \
-#    wget -qP ${ALFRESCO_AMPSSHARE} https://github.com/share-extras/js-console/releases/download/v0.6.0-rc1/javascript-console-share-0.6.0.amp && \
-#    wget -qP ${ALFRESCO_AMPSSHARE} https://github.com/ntmcminn/alfresco-pdf-toolkit/releases/download/1.3-Beta3/pdf-toolkit-share.amp && \
-#    wget -qP ${ALFRESCO_AMPSSHARE} https://github.com/teqnology/alfresco-header-share/blob/master/target/alfresco-header-share.amp?raw=true && \
+RUN wget -qP ${ALFRESCO_AMPS} https://github.com/share-extras/js-console/releases/download/v0.6.0-rc1/javascript-console-repo-0.6.0.amp && \
+    wget -qP ${ALFRESCO_AMPS} https://github.com/Alfresco/alfresco-support-tools/releases/download/1.10/support-tools-1.10.amp && \
+    wget -qP ${ALFRESCO_AMPS} https://github.com/ntmcminn/alfresco-pdf-toolkit/releases/download/1.3-Beta3/pdf-toolkit-repo.amp && \
+    wget -qP ${ALFRESCO_AMPSSHARE} https://github.com/ntmcminn/alfresco-pdf-toolkit/releases/download/1.3-Beta3/pdf-toolkit-share.amp && \
+    wget -qP ${ALFRESCO_AMPSSHARE} https://github.com/teqnology/alfresco-header-share/blob/master/target/alfresco-header-share.amp?raw=true && \
 #    wget -qP ${ALFRESCO_AMPSSHARE} http://www.form4.de/fileadmin/user_upload/Pix/Leistungen/alfresco/extensions/form4.alfresco.htmlwebpreviewer-1.0.0.amp && \
-#    ${ALFRESCO_BASE}/bin/apply_amps.sh
+    ${ALFRESCO_BASE}/bin/apply_amps.sh
 
 COPY alfresco_run.sh /alfresco_run.sh
 COPY alfresco_backup.sh /alfresco_backup.sh
 COPY alfresco_restore.sh /alfresco_restore.sh
 
-EXPOSE 21 5432 8005 8080 8100 8443
+EXPOSE 21 ${SHARE_PORT} 5432 8005  8100 8443
 
+WORKDIR /
 ENTRYPOINT ["switch","shell=/bin/bash","--","bash","/alfresco_run.sh"]
-
-#CMD ${ALFRESCO_BASE}/alfresco.sh start & tail -f
