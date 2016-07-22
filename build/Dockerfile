@@ -1,5 +1,4 @@
 # ubuntu xenial with alfresco
-
 FROM ubuntu:xenial
 MAINTAINER youske miyakoshi <youske@gmail.com>
 
@@ -9,7 +8,6 @@ MAINTAINER youske miyakoshi <youske@gmail.com>
 ENV S6OVERLAY_VERSION="v1.11.0.1"
 ENV S6OVERLAY_URL="https://github.com/just-containers/s6-overlay/releases/download/${S6OVERLAY_VERSION}/s6-overlay-amd64.tar.gz"
 ADD ${S6OVERLAY_URL} /tmp/
-
 
 # entrykit
 ENV ENTRYKIT_VERSION=0.4.0
@@ -83,7 +81,9 @@ COPY scripts/ /alfresco_scripts
 
 EXPOSE ${FTP_PORT} ${SHARE_PORT} 5432 8005  8100 8443
 
+
+#VOLUME ["${ALFRESCO_BASE}/tomcat/bin/setenv.sh"]
+
 WORKDIR /
 ENTRYPOINT ["switch","shell=/bin/bash","--","/init"]
-#CMD ["/bin/bash","${ALFRESCO_BASE}/alfresco.sh","start"]
 CMD ["/bin/bash","/alfresco_scripts/alfresco_run.sh"]

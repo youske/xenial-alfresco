@@ -1,16 +1,21 @@
-dockerfile ubutu zenial with alfresco
-=====================================
+dockerfile ubuntu xenial with alfresco-community
+================================================
+
 # 概要
-alfresco-communityのイメージを作成
+ubuntu (xenial) alfresco-community-インストーラのイメージを作成
 
 ubuntu xenial をベースイメージ
 alfresco-communityパッケージをインストールしたもの
 
-require resource core 2+ RAM 4.0G+
+なおインストールには require resource core 2+ RAM 4.0G+
 
 # build
 
+　　Dockerfileよりイメージを作成
     docker build --file Dockerfile -t "youske/xenial-alfresco" .
+
+    同梱のdocker-composeの場合
+    docker-compose build
 
 # run
 
@@ -51,7 +56,6 @@ require resource core 2+ RAM 4.0G+
 
 
 # timeout 設定変更
-
 
 Alfresco uses sessions cookies which are valid for 60 minutes, which means users are logged out after being inactive for 60 minutes and have to login multiple times a day.
 
