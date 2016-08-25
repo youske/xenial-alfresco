@@ -5,18 +5,16 @@ services:
     container_name: alfresco-vm
     build: build
     ulimits:
+      nproc: 65535
       nofile:
         soft: 20000
         hard: 40000
-      nproc: 65535
     ports:
       - "21:21"
       - "8080:8080"
     volumes:
       - data:/alfresco-recovery
-    stdin_open: true
-    tty: true
-    
+
 #    logging:
 #      driver: syslog
 #      options:
@@ -25,4 +23,3 @@ services:
 volumes:
   data:
     driver: local
-
