@@ -18,7 +18,7 @@ RUN PACKAGE="fontconfig libice6 libsm6 libxt6 libxrender1 libfontconfig1 libglu1
 
 RUN DOWNLOAD_URL=http://dl.alfresco.com/release/community/${ALFRESCO_VERSION}-build-${ALFRESCO_BUILD}/alfresco-community-installer-${ALFRESCO_VERSION}-linux-x64.bin && \
     wget -q ${DOWNLOAD_URL} -O /tmp/alfresco-community.bin && \
-    chmode +x /tmp/alfresco-community.bin && /tmp/alfresco-community.bin --mode text --installer-language en \
+    chmod +x /tmp/alfresco-community.bin && /tmp/alfresco-community.bin --mode text --installer-language en \
     --prefix ${ALFRESCO_BASE} \
     --postgres_port 5432 \
     --tomcat_server_port ${SHARE_PORT} \
@@ -40,7 +40,7 @@ RUN ALFRESCO_AMPS=${ALFRESCO_BASE}/amps && \
     wget -qP ${ALFRESCO_AMPSSHARE} https://github.com/teqnology/alfresco-header-share/blob/master/target/alfresco-header-share.amp?raw=true && \
 #    wget -qP ${ALFRESCO_AMPSSHARE} http://www.form4.de/fileadmin/user_upload/Pix/Leistungen/alfresco/extensions/form4.alfresco.htmlwebpreviewer-1.0.0.amp && \
     ${ALFRESCO_BASE}/bin/apply_amps.sh
-    ln -s -f ${ALFRESCO_LIBREOFFICE}/scripts/libreoffice_ctl.sh ${ALFRESCO_LIBREOFFICE}/scripts/ctl.sh
+#RUN    ln -s -f ${ALFRESCO_LIBREOFFICE}/scripts/libreoffice_ctl.sh ${ALFRESCO_LIBREOFFICE}/scripts/ctl.sh
 
 # remove downloadfile
 RUN apt-get autoremove && apt-get autoclean && rm -rf /tmp/*

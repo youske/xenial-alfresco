@@ -9,6 +9,7 @@ services:
       nofile:
         soft: 20000
         hard: 40000
+    mem_limit: 6192G
     ports:
       - "21:21"
       - "8080:8080"
