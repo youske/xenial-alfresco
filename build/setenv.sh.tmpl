@@ -1,0 +1,12 @@
+# Load Tomcat Native Library
+LD_LIBRARY_PATH={{ var "ALFRESCO_BASE" | default "/alfresco-community" }}/common/lib:$LD_LIBRARY_PATH
+
+JAVA_HOME={{ var "ALFRESCO_BASE" | default "/alfresco-community" }}/java
+JRE_HOME=$JAVA_HOME
+JAVA_OPTS="-XX:+DisableExplicitGC -XX:+UseConcMarkSweepGC -XX:+UseParNewGC -Djava.awt.headless=true
+ -Dalfresco.home=/alfresco-community -XX:ReservedCodeCacheSize=128m $JAVA_OPTS "
+JAVA_OPTS="-Xms{{ var "HEAPSIZE" | default "512M" }} -Xmx{{ var "MEMSIZE" | default "2048M" }} $JAVA_OPTS " # java-memory-settings
+export JAVA_HOME
+export JRE_HOME
+export JAVA_OPTS
+export LD_LIBRARY_PATH

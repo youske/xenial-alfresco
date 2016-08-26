@@ -12,13 +12,14 @@ ENV ALFRESCO_VERSION=201605 \
 
 #ENV    DATA_DIR=${ALFRESCO_BASE}/alf_data
 
-RUN PACKAGE="fontconfig libice6 libsm6 libxt6 libxrender1 libfontconfig1 libglu1-mesa libcups2 libxinerama1 xvfb imagemagick ghostscript xfonts-base" && \
+RUN PACKAGE="fontconfig libice6 libsm6 libxt6 libxrender1 libfontconfig1 libglu1-mesa libdbus-glib-1-2 libcups2 libxinerama1 xvfb imagemagick ghostscript xfonts-base" && \
     apt-get update && apt-get -y upgrade && \
     apt-get install -y wget language-pack-ja ${PACKAGE}
 
 RUN DOWNLOAD_URL=http://dl.alfresco.com/release/community/${ALFRESCO_VERSION}-build-${ALFRESCO_BUILD}/alfresco-community-installer-${ALFRESCO_VERSION}-linux-x64.bin && \
     wget -q ${DOWNLOAD_URL} -O /tmp/alfresco-community.bin && \
     chmod +x /tmp/alfresco-community.bin && /tmp/alfresco-community.bin --mode text --installer-language en \
+
     --prefix ${ALFRESCO_BASE} \
     --postgres_port 5432 \
     --tomcat_server_port ${SHARE_PORT} \
@@ -39,14 +40,26 @@ RUN ALFRESCO_AMPS=${ALFRESCO_BASE}/amps && \
     wget -qP ${ALFRESCO_AMPSSHARE} https://github.com/ntmcminn/alfresco-pdf-toolkit/releases/download/1.3-Beta3/pdf-toolkit-share.amp && \
     wget -qP ${ALFRESCO_AMPSSHARE} https://github.com/teqnology/alfresco-header-share/blob/master/target/alfresco-header-share.amp?raw=true && \
 #    wget -qP ${ALFRESCO_AMPSSHARE} http://www.form4.de/fileadmin/user_upload/Pix/Leistungen/alfresco/extensions/form4.alfresco.htmlwebpreviewer-1.0.0.amp && \
-    ${ALFRESCO_BASE}/bin/apply_amps.sh
-#RUN    ln -s -f ${ALFRESCO_LIBREOFFICE}/scripts/libreoffice_ctl.sh ${ALFRESCO_LIBREOFFICE}/scripts/ctl.sh
+    ${ALFRESCO_BASE}/bin/apply_amps.sh && \
+    ln -s -f ${ALFRESCO_LIBREOFFICE}/scripts/libreoffice_ctl.sh ${ALFRESCO_LIBREOFFICE}/scripts/ctl.sh
 
-# remove downloadfile
-RUN apt-get autoremove && apt-get autoclean && rm -rf /tmp/*
+ENV HEAPSIZE=1024M \
+    MEMSIZE=3096M
 
 COPY scripts/ /alfresco_scripts
+COPY setenv.sh.tmpl ${ALFRESCO_BASE}/tomcat/bin
+COPY enable.d/ /tmp
+RUN cd ${ALFRESCO_BASE}/tomcat/shared/classes/ && \
+    echo "\n" >> alfresco-global.properties && \
+    cat /tmp/cifs >> alfresco-global.properties && \
+    cat /tmp/ftp >> alfresco-global.properties && \
+    cat /tmp/rmi >> alfresco-global.properties
 
-EXPOSE ${FTP_PORT} ${SHARE_PORT} 5432 8005  8100 8443
+# remove downloadfile
+#RUN apt-get autoremove && apt-get autoclean && rm -rf /tmp/*
+
+EXPOSE ${FTP_PORT} ${SHARE_PORT} 5432 8005  8100 8443 56000-56009
+
 WORKDIR /
+ENTRYPOINT ["render","/alfresco-community/tomcat/bin/setenv.sh","--","/init"]
 CMD ["/bin/bash","/alfresco_scripts/alfresco_run.sh"]

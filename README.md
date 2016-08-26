@@ -52,8 +52,41 @@ alfresco-communityパッケージをインストールしたもの
     alfresco-restore.sh
 
 
+# alfresco-global.properties
+
+${TOMCAT_HOME}/shared/classes/alfresco-global.properties
 
 
+# ftp enabled
+
+alfresco-global.properties
+    ftp.enabled=true
+
+ftppasvモード
+    Docker exporse port
+    EXPOSE 56000-56009
+
+    docker-compose.yml
+
+    ports:
+      - "56000-56009"
+      - "56000-56009:56000-56009"
+      - "36000-36009:56000-56009"
+
+    docker run cli
+
+    ducoekr run -it --rm -p 56000-56009:56000-56009 <image>
+    http://stackoverflow.com/questions/28717464/docker-expose-all-ports-or-range-of-ports-from-7000-to-8000
+
+# jvm チューニング
+http://docs.alfresco.com/community/concepts/jvm-settings.html
+-XX;MempermSize=<memorySize>M
+-Xms1G
+-Xmx2G
+-Dcom.sun.management.jmxremote
+
+
+-XX:+UseConcMarkSweepGC -XX:+UseParNewGC
 
 # timeout 設定変更
 

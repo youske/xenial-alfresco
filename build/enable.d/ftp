@@ -1,0 +1,6 @@
+### ftp service
+ftp.enabled=true
+ftp.port=21
+ftp.dataPortFrom=56000
+ftp.dataPortTo=56009
+ftp.ipv6.enabled=false

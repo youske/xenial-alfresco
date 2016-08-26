@@ -9,17 +9,17 @@ services:
       nofile:
         soft: 20000
         hard: 40000
-    mem_limit: 6192G
+    environment:
+      - HEAPSIZE=1192M
+      - MEMSIZE=4096M
     ports:
       - "21:21"
+      - "8100:8100"
       - "8080:8080"
+      - "56000-56009:56000-56009"
     volumes:
       - data:/alfresco-recovery
-
-#    logging:
-#      driver: syslog
-#      options:
-#        syslog-address: "tcp://192.168.0.42:123"
+    tty: true
 
 volumes:
   data:
