@@ -56,9 +56,9 @@ RUN cd ${ALFRESCO_BASE}/tomcat/shared/classes/ && \
     cat /tmp/rmi >> alfresco-global.properties
 
 # remove downloadfile
-#RUN apt-get autoremove && apt-get autoclean && rm -rf /tmp/*
+RUN apt-get autoremove && apt-get autoclean && rm -rf /tmp/*
 
-EXPOSE ${FTP_PORT} ${SHARE_PORT} 5432 8005  8100 8443 56000-56009
+EXPOSE ${FTP_PORT} ${SHARE_PORT} 5432 8005 8100 8443 56000-56009
 
 WORKDIR /
 ENTRYPOINT ["render","/alfresco-community/tomcat/bin/setenv.sh","--","/init"]
