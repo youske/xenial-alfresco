@@ -13,8 +13,8 @@ ENV ALFRESCO_VERSION=201605 \
 #ENV    DATA_DIR=${ALFRESCO_BASE}/alf_data
 
 RUN PACKAGE="fontconfig libice6 libsm6 libxt6 libxrender1 libfontconfig1 libglu1-mesa libdbus-glib-1-2 libcups2 libxinerama1 xvfb imagemagick ghostscript xfonts-base" && \
-    apt-get update && apt-get -y upgrade && \
-    apt-get install -y wget language-pack-ja ${PACKAGE}
+    apt-get update && apt-get -y -q upgrade && \
+    apt-get install -y -q wget language-pack-ja ${PACKAGE}
 
 RUN DOWNLOAD_URL=http://dl.alfresco.com/release/community/${ALFRESCO_VERSION}-build-${ALFRESCO_BUILD}/alfresco-community-installer-${ALFRESCO_VERSION}-linux-x64.bin && \
     wget -q ${DOWNLOAD_URL} -O /tmp/alfresco-community.bin && \

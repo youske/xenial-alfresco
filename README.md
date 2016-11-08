@@ -69,8 +69,6 @@ ftppasvモード
     docker-compose.yml
 
     ports:
-      - "56000-56009"
-      - "56000-56009:56000-56009"
       - "36000-36009:56000-56009"
 
     docker run cli
@@ -80,6 +78,10 @@ ftppasvモード
 
 # jvm チューニング
 http://docs.alfresco.com/community/concepts/jvm-settings.html
+
+HEAPSIZE
+MEMSIZE
+
 -XX;MempermSize=<memorySize>M
 -Xms1G
 -Xmx2G
