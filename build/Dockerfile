@@ -2,8 +2,8 @@
 FROM youske/ubuntu-stdmachine:base
 MAINTAINER youske miyakoshi <youske@gmail.com>
 
-ENV ALFRESCO_VERSION=201612 \
-    ALFRESCO_BUILD=00014 \
+ENV ALFRESCO_VERSION=201605 \
+    ALFRESCO_BUILD=00010 \
     ALFRESCO_BASE=/alfresco-community \
     LANGUAGE=ja_JP.UTF-8 \
     SHARE_PORT=8080 \
